@@ -1,0 +1,61 @@
+@use "@/assets/fonts/style";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+@import "@/assets/styles/common/variables";
+@import "@/assets/styles/common/mixins";
+@import "@/assets/styles/common/base";
+
+@import "@/assets/styles/components/buttons";
+@import "@/assets/styles/components/checkbox";
+@import "@/assets/styles/components/tarriff";
+
+html,
+body {
+  min-height: 100%;
+
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+}
+
+.img-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+
+  img {
+    max-width: 365px;
+    max-height: 730px;
+  }
+
+  &::after {
+    content: "";
+    height: 80px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to top, var(--background) 0%, transparent 100%);
+  }
+}
+
+.title {
+  padding-block: calc(var(--spacing) * 10) calc(var(--spacing) * 15);
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1216px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1216px;
+  }
+}

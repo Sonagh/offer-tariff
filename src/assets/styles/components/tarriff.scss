@@ -1,0 +1,52 @@
+.tariff {
+  flex: 0 0 calc(33.333% - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--color-white);
+  background-color: #313637;
+  border: 2px solid #484D4E;
+  @apply py-5 px-4 rounded-md;
+
+  &.selected {
+    flex: 0 0 100%;
+    flex-direction: row;
+    gap: calc(var(--spacing) * 4);
+    order: -1;
+    padding-inline: calc(var(--spacing) * 16);
+    border-color: var(--primary);
+
+    .tariff__period {
+      text-align: center;
+    }
+
+    .tariff__text {
+      align-self: center;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  &__discount {
+    position: absolute;
+    top: calc(var(--spacing) / -2);
+    left: calc(var(--spacing) * 7);
+    color: var(--color-white);
+    background-color: var(--error);
+    border-bottom-left-radius: calc(var(--radius-xs) / 2);
+    border-bottom-right-radius: calc(var(--radius-xs) / 2);
+    z-index: 10;
+    @apply py-1 px-2 text-lg font-medium;
+  }
+}
+
+.price-wrap {
+  min-height: 80px;
+}

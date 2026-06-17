@@ -1,0 +1,33 @@
+.checkbox {
+  position: absolute;
+  opacity: 0;
+
+  &:checked + .checkbox-helper {
+    i {
+      opacity: 1;
+    }
+  }
+
+  &-helper {
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #424748;
+    transition: border-color 0.2s;
+
+    i {
+      color: var(--primary);
+      font-size: 10px;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    &.error {
+      border-color: var(--error);
+    }
+  }
+}
