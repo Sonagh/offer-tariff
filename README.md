@@ -1,71 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Offer tariffs mini project
 
-## Getting Started
+Implementation of the pricing plans page based on the provided Figma design.
 
-First, run the development server:
+## Tech Stack
+
+- React
+- Next.js
+- TypeScript
+- Tailwind CSS
+
+## Features
+
+### Pricing Plans
+
+- Loads tariffs from the API endpoint:
+    - https://t-core.fit-hub.pro/Test/GetTariffs
+- Displays all tariffs returned by the service.
+- Calculates discount percentage dynamically:
+
+  ```
+  discount = ((full_price - price) / full_price) * 100
+  ```
+
+- Automatically selects the tariff with `is_best: true` on initial load.
+- Highlights the currently selected tariff.
+- Displays the "Best Offer" badge for tariffs marked as `is_best`.
+
+### Timer
+
+- Sticky header with a 2-minute countdown timer.
+- Timer updates every second.
+- When 30 seconds remain:
+    - Timer changes to red.
+    - Timer starts blinking.
+- When the timer expires:
+    - Discounted prices are hidden.
+    - Regular prices (`full_price`) remain visible.
+
+### Buy Button
+
+- Animated blinking/pulse effect.
+- Validation for required checkbox:
+    - If the checkbox is not checked and the user clicks **Buy**, the checkbox is highlighted in red.
+
+### Responsive Design
+
+- Mobile layout.
+- Tablet layout.
+- Desktop layout.
+- Matches the provided Figma design.
+
+---
+
+## Price Expiration Animation Proposal
+
+When the timer expires:
+
+1. Fade out discounted prices.
+2. Animate the strike-through price removal.
+3. Scale the regular price slightly (e.g. `scale(1.05)`).
+4. Fade in the regular price as the primary price.
+---
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+---
+
+## Run Development Server
+
+```bash
+bun run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+Application will be available at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3001
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## API Response Example
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-Необходимо перейти по ссылке в Figma (https://www.figma.com/file/9XgWK3p8hV7kGaeNbVqnpm/%D0%B4%D0%BB%D1%8F-%D0%B2%D0%B5%D1%80%D1%81%D1%82%D0%BA%D0%B8?type=design&node-id=0%3A1&mode=design&t=h09Rzn4ocBcWUV0t-1)
-Сохранить файл себе в Draft
-Сверстать все экраны с тарифами (отобразить выделение тарифов при выборе, 
-на кнопку купить наложить анимационный эффект мигания (перехода у кнопки нет), 
-отобразить таймер на закрепленном хедере - поставить 2 минуты, при остатке в 30 сек таймер мигает 
-и выделяется красным). При нажатии на кнопку купить без проставленного чекбокса - 
-он должен выделяться красным.
-Разложить тарифы полученные от сервиса на страницу с тарифами.
-Когда таймер заканчивается скидочные цены пропадают и остаются цены без скидки, 
-предложить вариант как лучше это анимировать
-Тестовое задание необходимо выполнить на следующий технологиях: React, Next, Tailwind.
-
-
-Получение данных от сервиса
-Ссылка на получение:
-https://t-core.fit-hub.pro/Test/GetTariffs
-Пример одной записи:
+```json
 {
-"id": "f347d050-073c-4969-ae91-7346f935cf70",
-"period": "1 неделя",
-"price": 149,
-"full_price": 999,
-"is_best": false,
-"text": "Чтобы просто начать"
-},
-Необходимые для работы поля
-period - период тарифа
-price - цена тарифа со скидкой
-full_price- цена тарифа без скидки
-is_best - выбран по дефолту при первой загрузке страницы. У тарифа большая плашка в десктоп версии.
-text - текст тарифы
+  "id": "f347d050-073c-4969-ae91-7346f935cf70",
+  "period": "1 week",
+  "price": 149,
+  "full_price": 999,
+  "is_best": false,
+  "text": "Just to get started"
+}
+```
 
-Процент скидки нужно рассчитать самому.
+---
+
+## Assumptions
+
+- The tariff marked with `is_best = true` is selected by default.
+- If multiple tariffs have `is_best = true`, the first one is selected.
+- Timer state is client-side only.
+- No purchase API integration is required.
+- Buy button demonstrates UI behavior only.
+
+---
+
+## Author
+
+Sona Gharagyozyan
